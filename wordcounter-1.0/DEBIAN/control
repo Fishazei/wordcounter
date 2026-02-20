@@ -1,0 +1,9 @@
+Package: wordcounter
+Version: 1.0
+Section: utils
+Priority: optional
+Architecture: amd64
+Depends: build-essential
+Maintainer: Fishazei
+Description: Word counter program
+ A simple program that counts words in a string
