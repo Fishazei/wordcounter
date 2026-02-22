@@ -60,7 +60,7 @@ jobs:
         run: make test
         working-directory: ./cicd
 
-  Deploy:
+  Pack:
     needs: Test
     runs-on: ubuntu-latest
 
