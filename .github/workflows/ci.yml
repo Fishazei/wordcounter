@@ -26,13 +26,13 @@ jobs:
 
       - name: Building program
         run: make all
-        working-directory: /src
+        working-directory: ./src
 
       - name: Test
         run: |
           echo "Try to run"
           ./wordcounter <<< "test or not test"
-        working-directory: /usr/bin
+        working-directory: ./usr/bin
 
       - name: Upload binaries to artifact
         uses: actions/upload-artifact@v4
@@ -65,8 +65,8 @@ jobs:
 
       - name: Compile tests
         run: make all
-        working-directory: /cicd
+        working-directory: ./cicd
 
       - name: Run Tests
         run: make test
-        working-directory: /cicd
+        working-directory: ./cicd
