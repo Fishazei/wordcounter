@@ -62,9 +62,11 @@ jobs:
 
       - name: Scripts tests
         run: chmod +x test_*.sh
+        working-directory: ./cicd
 
       - name: run scripts tests
         run: ./test_*.sh
+        working-directory: ./cicd
 
   PackagerNotMyLover:
     needs: Test
