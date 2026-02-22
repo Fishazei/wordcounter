@@ -31,5 +31,5 @@ jobs:
       - name: Test
         run: |
           echo "Try to run"
-          ./wordcounter <<< "test or not test"
+          ./wordcounter << "test or not test"
         working-directory: ./usr/bin
