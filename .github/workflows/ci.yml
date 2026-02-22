@@ -60,6 +60,19 @@ jobs:
         run: make test
         working-directory: ./cicd
 
+
+  PackagerNotMyLover:
+    needs: Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: wordcounter-artifact
+          path: ./usr/bin
+
       - name: Build deb-package
         run: |
           dpkg-deb --build . Wordcounter.deb
