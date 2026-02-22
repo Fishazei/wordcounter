@@ -1,0 +1,36 @@
+name: CI-Pipepline
+
+on:
+  push:
+    branches: main
+  pull_request:
+    branches: main
+
+  jobs:
+    Build:
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Clone repo
+          uses: actions/checkout@v4
+
+        - name: Install depend
+          run: |
+            sudo apt-get update
+            sudo apt-get install -y build-essential g++ make
+
+        - name: Checking ver
+          run: |
+            g++ --version
+            make --version
+
+        - name: Building program
+          run: make all
+          working-directory: ./src
+
+        - name: Test
+          run: |
+            echo "Try to run"
+            ./wordcount
+            test or not test
+          working-directory: ./usr/bin
