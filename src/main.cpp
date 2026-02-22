@@ -22,13 +22,10 @@ bool isWordDelimiter(char c) {
 bool isWordChar(char c, bool isFirstChar) {
     // Буквы и цифры всегда часть слова
     if (isalnum(c)) return true;
-
     // Дефис может быть частью слова, если это не первый символ
     if (c == '-' && !isFirstChar) return true;
-
     // Апостроф может быть частью слова (например, "don't")
     if (c == '\'' && !isFirstChar) return true;
-
     return false;
 }
 /**
@@ -41,11 +38,9 @@ int countWords(const string& str) {
     bool inWord = false;
     bool potentialWord = false;
     int wordLength = 0;
-
     for (size_t i = 0; i < str.length(); ++i) {
         char c = str[i];
         char nextChar = (i + 1 < str.length()) ? str[i + 1] : '\0';
-
         if (isWordDelimiter(c)) {
             // Если мы были в слове, заканчиваем его
             if (inWord) {
@@ -84,12 +79,10 @@ int countWords(const string& str) {
             }
         }
     }
-
     // Проверяем последнее слово
     if (inWord && wordLength > 0) {
         wordCount++;
     }
-
     return wordCount;
 }
 /**
@@ -118,7 +111,6 @@ int main(int argc, char* argv[]) {
         // Интерактивный режим
         cout << "type line: ";
         getline(cin, input);
-
         if (cin.fail()) {
             cout << "Err! Input error" << endl;
             return 1;
