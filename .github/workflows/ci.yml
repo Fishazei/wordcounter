@@ -26,10 +26,47 @@ jobs:
 
       - name: Building program
         run: make all
-        working-directory: ./src
+        working-directory: /src
 
       - name: Test
         run: |
           echo "Try to run"
-          ./wordcounter << "test or not test"
-        working-directory: ./usr/bin
+          ./wordcounter <<< "test or not test"
+        working-directory: /usr/bin
+
+      - name: Upload binaries to artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: wordcounter-artifact
+          path: usr/bin/wordcounter
+          retention-days: 1
+
+  Test:
+    needs: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: wordcounter-artifact
+          path: ./usr/bin
+
+      - run: chmod +x ./usr/bin/wordcounter
+
+      - name: Clone repo
+        uses: actions/checkout@v4
+
+      - name: Install depend
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential g++ make
+
+      - name: Compile tests
+        run: make all
+        working-directory: /cicd
+
+      - name: Run Tests
+        run: make test
+        working-directory: /cicd
