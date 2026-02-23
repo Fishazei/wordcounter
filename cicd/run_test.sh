@@ -1,6 +1,7 @@
 #!/bin/bash
+set -e
 
-make all
-make test
-make clean
-./test_3.sh
+echo "Tests"
+make all || { make clean; exit 1; }
+make test || { make clean; exit 1; }
+./test_3.sh || { exit 1; }

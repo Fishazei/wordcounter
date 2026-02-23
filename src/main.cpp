@@ -2,6 +2,7 @@
 #include <string>
 #include <cctype>
 #include <limits>
+#include <unistd.h>
 using namespace std;
 
 /**
@@ -103,8 +104,8 @@ int main(int argc, char* argv[]) {
         input += argv[1];
     }
     else {
-        // Интерактивный режим
-        cout << "type line: ";
+        if (isatty(STDIN_FILENO)) 
+            cout << "type line: ";
         getline(cin, input);
         if (cin.fail()) {
             cout << "Err! Input error" << endl;
