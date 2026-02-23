@@ -19,7 +19,7 @@ bool isWordDelimiter(char c) {
  * Проверка, является ли символ частью слова
  * Буквы, цифры и дефис внутри слова
  */
-bool isWordChar(char c, bool isFirstChar) {
+bool isWordChar(char c, bool isFirstChar, char prevChar) {
     // Буквы и цифры всегда часть слова
     if (isalnum(c)) return true;
 
@@ -39,53 +39,48 @@ bool isWordChar(char c, bool isFirstChar) {
 int countWords(const string& str) {
     int wordCount = 0;
     bool inWord = false;
-    bool potentialWord = false;
     int wordLength = 0;
+    char prevChar = '\0';
+
     for (size_t i = 0; i < str.length(); ++i) {
         char c = str[i];
-        char nextChar = (i + 1 < str.length()) ? str[i + 1] : '\0';
+
         if (isWordDelimiter(c)) {
-            // Если мы были в слове, заканчиваем его
+            // Завершаем слово, если были внутри
             if (inWord) {
-                // Проверяем, что слово состоит хотя бы из одного символа
-                if (wordLength > 0) {
-                    wordCount++;
-                }
+                wordCount++;
                 inWord = false;
                 wordLength = 0;
             }
-            potentialWord = false;
+            prevChar = c;
         }
-        else {
-            // Проверяем, может ли символ быть частью слова
-            if (isWordChar(c, wordLength == 0)) {
-                if (!inWord) {
-                    // Начало нового слова
-                    inWord = true;
-                    wordLength = 1;
-                }
-                else {
-                    // Продолжение слова
-                    wordLength++;
-                }
+        else if (isWordChar(c, wordLength == 0, prevChar)) {
+            // Символ может быть частью слова
+            if (!inWord) {
+                inWord = true;
+                wordLength = 1;
             }
             else {
-                // Символ не является частью слова
-                if (inWord) {
-                    // Завершаем текущее слово
-                    if (wordLength > 0) {
-                        wordCount++;
-                    }
-                    inWord = false;
-                    wordLength = 0;
-                }
+                wordLength++;
             }
+            prevChar = c;
+        }
+        else {
+            // Символ не является частью слова
+            if (inWord) {
+                wordCount++;
+                inWord = false;
+                wordLength = 0;
+            }
+            prevChar = c;
         }
     }
+
     // Проверяем последнее слово
-    if (inWord && wordLength > 0) {
+    if (inWord) {
         wordCount++;
     }
+
     return wordCount;
 }
 /**
