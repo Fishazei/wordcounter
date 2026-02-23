@@ -117,6 +117,6 @@ int main(int argc, char* argv[]) {
     }
     // Подсчет слов
     int words = countWords(input);
-    cout << "Words in line: " << words << endl;
+    cout << words;
     return 0;
 }
