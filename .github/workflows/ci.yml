@@ -53,7 +53,7 @@ jobs:
           sudo apt-get install -y build-essential g++ make
 
       - name: Scripts tests
-        run: chmod +x ./run_test.sh
+        run: chmod +x run_test.sh
         working-directory: ./cicd
 
       - name: run scripts tests
