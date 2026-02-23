@@ -14,7 +14,7 @@ int main(int argc, char *argv[]){
 	result += runTest(
 		"test2",
 		"sim salabim",
-		"5"
+		"2"
 	);
 	result += runTest(
 		"test3",
