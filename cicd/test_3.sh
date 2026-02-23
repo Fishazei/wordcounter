@@ -18,12 +18,6 @@ expected3="0"
 if [ "$output1" == "$expected1" ] && [ "$output2" == "$expected2" ] && [ "$output3" == "$expected3" ]; then
     echo "Тест 3 пройден"
 else
-    echo "$output1" 
-    echo "$expected1"
-    echo "$output2" 
-    echo "$expected2"
-    echo "$output3" 
-    echo "$expected3"
     echo "Тест 3 не пройден"
     exit 1
 fi

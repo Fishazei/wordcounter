@@ -1,12 +1,12 @@
 all:
-	g++ -o test1 sourceTest1.cpp
-	g++ -o test2 sourceTest2.cpp
+	g++ -o unit-test1 sourceTest1.cpp
+	g++ -o unit-test2 sourceTest2.cpp
 
 # Не очень круто, но не хочу в пайплайне писать
 test:
-	./test1
-	./test2
+	./unit-test1
+	./unit-test2
 
 clean: 
-	rm test1
-	rm test2
+	rm unit-test1
+	rm unit-test2
