@@ -22,10 +22,13 @@ bool isWordDelimiter(char c) {
 bool isWordChar(char c, bool isFirstChar) {
     // Буквы и цифры всегда часть слова
     if (isalnum(c)) return true;
-    // Дефис может быть частью слова, если это не первый символ
-    if (c == '-' && !isFirstChar) return true;
-    // Апостроф может быть частью слова (например, "don't")
-    if (c == '\'' && !isFirstChar) return true;
+
+    // Дефис и апостроф могут быть частью слова, если они внутри слова
+    // и окружены буквами/цифрами
+    if ((c == '-' || c == '\'') && !isFirstChar && isalnum(prevChar)) {
+        return true;
+    }
+
     return false;
 }
 /**
