@@ -6,18 +6,18 @@ using namespace std;
 
 /**
  * Проверка, является ли символ разделителем слов
- * Разделители: пробельные символы и знаки препинания
  */
 bool isWordDelimiter(char c) {
-    // Пробельные символы
+    // Пробельные символы всегда разделители
     if (isspace(c)) return true;
-    // Знаки препинания, которые могут быть разделителями
-    const string punctuation = ".,!?;:-()\"'[]{}<>/\\|@#$%^&*+=~`";
+
+    // Знаки препинания, кроме апострофа и дефиса
+    const string punctuation = ".,!?;:()\"[]{}<>/\\|@#$%^&*+=~`";
     return punctuation.find(c) != string::npos;
 }
+
 /**
  * Проверка, является ли символ частью слова
- * Буквы, цифры и дефис внутри слова
  */
 bool isWordChar(char c, bool isFirstChar, char prevChar) {
     // Буквы и цифры всегда часть слова
@@ -31,10 +31,9 @@ bool isWordChar(char c, bool isFirstChar, char prevChar) {
 
     return false;
 }
+
 /**
  * Функция для подсчета количества слов в строке
- * @param str входная строка
- * @return количество слов
  */
 int countWords(const string& str) {
     int wordCount = 0;
@@ -83,6 +82,7 @@ int countWords(const string& str) {
 
     return wordCount;
 }
+
 /**
  * Проверка входных данных
  */
@@ -98,12 +98,9 @@ bool validateInput(const string& str) {
 int main(int argc, char* argv[]) {
     string input;
     // Проверяем аргументы командной строки
-    if (argc > 1) {
-        // Объединяем все аргументы в одну строку
-        for (int i = 1; i < argc; ++i) {
-            if (i > 1) input += " ";
-            input += argv[i];
-        }
+    if (argc > 2) return 1;
+    if (argc == 2) {
+        input += argv[1];
     }
     else {
         // Интерактивный режим
