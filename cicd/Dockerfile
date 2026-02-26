@@ -4,7 +4,7 @@ ARG PACKAGE_NAME="Wordcounter.deb"
 FROM ubuntu:latest
 ARG PACKAGE_NAME
 # make dir in docker
-WORDIR: /tmp
+WORDIR /tmp
 
 # prepare
 RUN apt-get update
