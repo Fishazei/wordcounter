@@ -15,6 +15,7 @@ COPY ../$PACKAGE_NAME /tmp/
 RUN dpkg -i $PACKAGE_NAME
 RUN apt-get -f install -y
 
-RUN chmod +x /usr/vin/wordcounter	# Its need because this stuff comes without execute perm
+# Its need because this stuff comes without execute perm
+RUN chmod +x /usr/vin/wordcounter
 
 ENTRYPOINT ["wordcounter"]
