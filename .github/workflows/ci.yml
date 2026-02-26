@@ -79,6 +79,37 @@ jobs:
       - name: Upload deb
         uses: actions/upload-artifact@v4
         with:
-          name: deb-package
+          name: wc-deb-package
           path: "Wordcounter.deb"
           retention-days: 1
+
+  Deploy:
+    needs: PackagerNotMyLover
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Q docker
+        run: docker --version
+
+      - name: clone
+        uses: actions/checkout@v4
+
+      - name: Download deb-package
+        uses: actions/download-artifact@v4
+        with:
+          name: wc-deb-package
+          path: .
+
+      - name: Build docker image
+        run: |
+          docker build -t ${{ vars.DOCKER_USERNAME }}/wordcounter:1.0.0 -f cicd/Dockerfile .
+          docker tag ${{ vars.DOCKER_USERNAME }}/wordcounter:1.0.0 ${{ vars.DOCKER_USERNAME }}/wordcounter:latest
+
+      - name: Deploy on docker container
+        run: docker run ${{ vars.DOCKER_USERNAME }}/wordcounter "- Don't say his name! - Whose name is it? - Tarasevich."
+
+      - name: Docker Log in
+        run: docker login -u ${{ vars.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Real Deploy
+        run: docker push -a ${{ vars.DOCKER_USERNAME }}/wordcounter
