@@ -16,6 +16,6 @@ RUN dpkg -i $PACKAGE_NAME
 RUN apt-get -f install -y
 
 # Its need because this stuff comes without execute perm
-RUN chmod +x /usr/vin/wordcounter
+RUN chmod +x /usr/bin/wordcounter
 
 ENTRYPOINT ["wordcounter"]
