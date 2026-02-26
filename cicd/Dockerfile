@@ -1,9 +1,10 @@
 ARG PACKAGE_NAME="Wordcounter.deb"
 
 # common set up
-FROM: ubuntu:latest
+FROM ubuntu:latest
 ARG PACKAGE_NAME
-WORDIR: /tmp			# in Docker
+# make dir in docker
+WORDIR: /tmp
 
 # prepare
 RUN apt-get update
