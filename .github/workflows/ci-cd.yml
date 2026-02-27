@@ -3,13 +3,11 @@ name: CI-Pipepline
 on:
   push:
     branches: main
+# experiment area
+    tags: '*'
+# end experiment area
   pull_request:
     branches: main
-# experiment area
-  push:
-    tags:
-      - '*'
-# end experiment area
 
 env:
   DOCKER_IMAGE_UN: ${{ vars.DOCKER_USERNAME }}/wordcounter
