@@ -6,9 +6,9 @@ on:
   pull_request:
     branches: main
 # experiment area
-    push:
-      tags:
-        - '*'
+  push:
+    tags:
+      - '*'
 # end experiment area
 
 env:
