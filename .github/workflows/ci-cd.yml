@@ -5,6 +5,11 @@ on:
     branches: main
   pull_request:
     branches: main
+# experiment area
+    push:
+      tags:
+        - '*'
+# end experiment area
 
 env:
   DOCKER_IMAGE_UN: ${{ vars.DOCKER_USERNAME }}/wordcounter
@@ -90,7 +95,9 @@ jobs:
   Deploy:
     needs: PackagerNotMyLover
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags')
+# experiment area
+     if: startsWith(github.ref, 'refs/tags')
+# end experiment area
 
     steps:
       - name: Q docker
@@ -108,13 +115,13 @@ jobs:
       - name: Build docker image
         run: |
           docker build -t ${{ env.DOCKER_IMAGE_UN }}:1.0.0 -f cicd/Dockerfile .
-          docker tag ${{ vars.DOCKER_USERNAME }}/wordcounter:1.0.0 ${{ vars.DOCKER_USERNAME }}/wordcounter:latest
+          docker tag ${{ env.DOCKER_IMAGE_UN }}:1.0.0 ${{ env.DOCKER_IMAGE_UN }}:latest
 
       - name: Deploy on docker container
-        run: docker run ${{ vars.DOCKER_USERNAME }}/wordcounter "- Don't say his name! - Whose name is it? - Gagarin."
+        run: docker run ${{ env.DOCKER_IMAGE_UN }} "- Don't say his name! - Whose name is it? - Gagarin."
 
       - name: Docker Log in
         run: docker login -u ${{ vars.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Real Deploy
-        run: docker push -a ${{ vars.DOCKER_USERNAME }}/wordcounter
+        run: docker push -a ${{ env.DOCKER_IMAGE_UN }}
