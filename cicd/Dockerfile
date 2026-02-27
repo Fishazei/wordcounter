@@ -2,7 +2,6 @@ ARG PACKAGE_NAME="Wordcounter.deb"
 
 # common set up
 FROM ubuntu:latest
-ARG PACKAGE_NAME
 # make dir in docker
 WORKDIR /tmp
 

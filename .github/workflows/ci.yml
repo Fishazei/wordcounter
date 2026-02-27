@@ -107,7 +107,7 @@ jobs:
           docker tag ${{ vars.DOCKER_USERNAME }}/wordcounter:1.0.0 ${{ vars.DOCKER_USERNAME }}/wordcounter:latest
 
       - name: Deploy on docker container
-        run: docker run ${{ vars.DOCKER_USERNAME }}/wordcounter "- Don't say his name! - Whose name is it? - Tarasevich."
+        run: docker run ${{ vars.DOCKER_USERNAME }}/wordcounter "- Don't say his name! - Whose name is it? - Gagarin."
 
       - name: Docker Log in
         run: docker login -u ${{ vars.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
