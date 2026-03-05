@@ -1,4 +1,4 @@
-ARG PACKAGE_NAME="wordcounter.deb"
+ARG PACKAGE_NAME="Wordcounter.deb"
 
 FROM ubuntu:latest
 ARG PACKAGE_NAME
