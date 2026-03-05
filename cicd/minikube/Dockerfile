@@ -3,7 +3,7 @@ ARG PACKAGE_NAME="Wordcounter.deb"
 FROM ubuntu:latest
 ARG PACKAGE_NAME
 WORKDIR /tmp
-RUN apt-get install update
+RUN apt-get update
 RUN apt-get install -y dpkg-dev
 
 COPY $PACKAGE_NAME /tmp/
