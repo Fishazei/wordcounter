@@ -1,0 +1,8 @@
+app:
+  name: wordcounter
+
+image:
+  name: fishazei/wordcounter-minikube
+  tag: latest
+
+replicaCount: 1
