@@ -94,7 +94,7 @@ jobs:
     needs: PackagerNotMyLover
     runs-on: ubuntu-latest
 # experiment area
-    if: startsWith(github.ref, 'refs/tags')
+#    if: startsWith(github.ref, 'refs/tags')
 # end experiment area
 
     steps:
@@ -118,8 +118,15 @@ jobs:
       - name: Deploy on docker container
         run: docker run ${{ env.DOCKER_IMAGE_UN }} "- Don't say his name! - Whose name is it? - Gagarin."
 
+      - name: Build minikube docker image
+        run: |
+          docker build -t ${{ env.DOCKER_IMAGE_UN }}:1.0.0 -f cicd/minikube/Dockerfile .
+          docker tag ${{ env.DOCKER_IMAGE_UN }}:1.0.0 ${{ env.DOCKER_IMAGE_UN }}:latest
+
       - name: Docker Log in
         run: docker login -u ${{ vars.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Real Deploy
-        run: docker push -a ${{ env.DOCKER_IMAGE_UN }}
+        run: |
+          docker push -a ${{ env.DOCKER_IMAGE_UN }}
+          docker push -a ${{ env.DOCKER_IMAGE_UN }}-minikube
