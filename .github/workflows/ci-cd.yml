@@ -120,8 +120,8 @@ jobs:
 
       - name: Build minikube docker image
         run: |
-          docker build -t ${{ env.DOCKER_IMAGE_UN }}:1.0.0 -f cicd/minikube/Dockerfile .
-          docker tag ${{ env.DOCKER_IMAGE_UN }}:1.0.0 ${{ env.DOCKER_IMAGE_UN }}:latest
+          docker build -t ${{ env.DOCKER_IMAGE_UN }}-minikube:1.0.0 -f cicd/minikube/Dockerfile .
+          docker tag ${{ env.DOCKER_IMAGE_UN }}-minikube:1.0.0 ${{ env.DOCKER_IMAGE_UN }}-minikube:latest
 
       - name: Docker Log in
         run: docker login -u ${{ vars.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
