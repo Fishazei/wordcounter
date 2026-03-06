@@ -2,7 +2,7 @@ app:
   name: wordcounter
 
 image:
-  repository: fishazei/wordcounter-minikube
+  name: fishazei/wordcounter-minikube
   tag: "latest"
   pullPolicy: Always
 
