@@ -131,4 +131,4 @@ jobs:
       - name: Real Deploy
         run: |
           docker push -a ${{ env.DOCKER_IMAGE_UN }}
-          docker push -a ${{ env.DOCKER_IMAGE_UN }}-minikube:latest
+          docker push -a ${{ env.DOCKER_IMAGE_UN }}-minikube
