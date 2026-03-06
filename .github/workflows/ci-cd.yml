@@ -120,8 +120,10 @@ jobs:
 
       - name: Build minikube docker image
         run: |
-          docker build -t ${{ env.DOCKER_IMAGE_UN }}-minikube:1.0.0 -f cicd/minikube/Dockerfile .
-          docker tag ${{ env.DOCKER_IMAGE_UN }}-minikube:1.0.0 ${{ env.DOCKER_IMAGE_UN }}-minikube:latest
+          TAG=${{ github.sha }}
+          echo "TAG=$TAG" >> $GITHUB_ENV
+          docker build -t ${{ env.DOCKER_IMAGE_UN }}-minikube:$TAG  -f cicd/minikube/Dockerfile .
+          docker tag ${{ env.DOCKER_IMAGE_UN }}-minikube:$TAG ${{ env.DOCKER_IMAGE_UN }}-minikube:latest
 
       - name: Docker Log in
         run: docker login -u ${{ vars.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
@@ -129,4 +131,4 @@ jobs:
       - name: Real Deploy
         run: |
           docker push -a ${{ env.DOCKER_IMAGE_UN }}
-          docker push -a ${{ env.DOCKER_IMAGE_UN }}-minikube
+          docker push -a ${{ env.DOCKER_IMAGE_UN }}-minikube:latest
