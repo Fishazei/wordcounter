@@ -2,7 +2,8 @@ app:
   name: wordcounter
 
 image:
-  name: fishazei/wordcounter-minikube
-  tag: latest
+  repository: fishazei/wordcounter-minikube
+  tag: "latest"
+  pullPolicy: Always
 
 replicaCount: 1
