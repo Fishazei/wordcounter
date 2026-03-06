@@ -16,6 +16,9 @@ output3=$(../usr/bin/wordcounter "   !!! ??? ,,,   " )
 expected3="0"
 
 if [ "$output1" == "$expected1" ] && [ "$output2" == "$expected2" ] && [ "$output3" == "$expected3" ]; then
+    echo "$output1"
+    echo "$output2"
+    echo "$output3"
     echo "Тест 3 пройден"
 else
     echo "Тест 3 не пройден"
